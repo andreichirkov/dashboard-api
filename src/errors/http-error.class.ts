@@ -1,3 +1,4 @@
+//расширение стандартного класса ошибок
 export class HTTPError extends Error {
 	statusCode: number
 	context?: string

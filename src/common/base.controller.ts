@@ -2,7 +2,10 @@ import { LoggerService } from '../logger/logger.service';
 import { Response, Router } from 'express';
 import { IControllerRoute } from './route.interface';
 
+//инстанс абстрактного класса нельзя создать
+//базовый класс, в каком то конкретном контроллере можно нарастить его функциональность
 export abstract class BaseController {
+	//c _ потому что будут геттеры и сеттеры для него
 	private readonly _router: Router
 
 	constructor(private logger: LoggerService) {
@@ -15,7 +18,7 @@ export abstract class BaseController {
 
 	public send<T>(res: Response, code: number, message: T) {
 		res.type('application/json')
-		return  res.status(code).json(message)
+		return res.status(code).json(message)
 	}
 
 	public ok<T>(res: Response, message: T) {
@@ -26,6 +29,7 @@ export abstract class BaseController {
 		return res.status(201)
 	}
 
+	//нельзя вызывать из инстанса класса, но можно из наследника
 	protected bindRoutes(routes: IControllerRoute[]) {
 		for(const route of routes) {
 			this.logger.log(`[${route.method}] ${route.path}`)

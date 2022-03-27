@@ -12,8 +12,11 @@ export class ExeptionFilter implements IExeptionFilter {
 
 	//err юнион тип от Error и HTTPError
 	catch(err: Error | HTTPError, req: Request, res: Response, next: NextFunction) {
+		//instanceof хорошо для проверки юнион типов
 		if (err instanceof HTTPError) {
+			//запись в логгер
 			this.logger.error(`[${err.context}] Ошибка ${err.statusCode} : ${err.message}`)
+			//отпрвка на фронт (insomnia например)
 			res.status(err.statusCode).send({ err: err.message })
 		} else {
 			this.logger.error(`${err.message}`)

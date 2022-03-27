@@ -1,17 +1,21 @@
 import { Logger } from 'tslog'
+import { ILogger } from './logger.interface';
 
-export class LoggerService {
+//логгер должен удовлетворять интервейс айЛоггер
+//свойства и методы дальше это и есть конкретная имплементация
+export class LoggerService implements ILogger {
 	public logger: Logger
 
 	constructor() {
 		this.logger = new Logger({
 			displayInstanceName: false,
-			displayLoggerName: false,
+			displayLoggerName: false,  //не нужен так как логгер один
 			displayFilePath: 'hidden',
 			displayFunctionName: false
 		})
 	}
 
+	//писать static log был бы самый тупой способ, импортируем класс и потом вызываем методы
 	log(...args: unknown[]) {
 		this.logger.info(...args)
 	}

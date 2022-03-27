@@ -9,7 +9,14 @@ async function bootstrap() {
 	//простейшая DI
 
 	const logger = new LoggerService()
-	const app = new App(logger, new UsersController(logger), new ExeptionFilter(logger))
+
+	//внедряем зависимости
+	const app = new App(
+		logger,
+		new UsersController(logger),
+		new ExeptionFilter(logger)
+	)
+
 	await app.init()
 }
 

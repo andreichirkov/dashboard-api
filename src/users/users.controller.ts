@@ -14,7 +14,7 @@ export class UsersController extends BaseController {
 	}
 
 	login(req: Request, res: Response, next: NextFunction) {
-		next(new HTTPError(401, 'ошибка авторизации', 'login'))
+		next(new HTTPError(401, 'Ошибка авторизации', 'login'))
 	}
 
 	register(req: Request, res: Response, next: NextFunction) {
