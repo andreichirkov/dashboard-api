@@ -1,8 +1,11 @@
 import { Logger } from 'tslog'
 import { ILogger } from './logger.interface';
+import { injectable } from 'inversify';
+import 'reflect-metadata'
 
 //логгер должен удовлетворять интервейс айЛоггер
 //свойства и методы дальше это и есть конкретная имплементация
+@injectable()
 export class LoggerService implements ILogger {
 	public logger: Logger
 

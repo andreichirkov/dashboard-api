@@ -1,14 +1,17 @@
-import { LoggerService } from '../logger/logger.service';
 import { Response, Router } from 'express';
 import { IControllerRoute } from './route.interface';
+import { ILogger } from '../logger/logger.interface';
+import { injectable } from 'inversify';
+import 'reflect-metadata'
 
 //инстанс абстрактного класса нельзя создать
 //базовый класс, в каком то конкретном контроллере можно нарастить его функциональность
+@injectable()
 export abstract class BaseController {
 	//c _ потому что будут геттеры и сеттеры для него
 	private readonly _router: Router
 
-	constructor(private logger: LoggerService) {
+	constructor(private logger: ILogger) {
 		this._router = Router()
 	}
 
