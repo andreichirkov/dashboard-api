@@ -1,6 +1,6 @@
 import { Logger } from 'tslog'
-import { ILogger } from './logger.interface';
-import { injectable } from 'inversify';
+import { ILogger } from './logger.interface'
+import { injectable } from 'inversify'
 import 'reflect-metadata'
 
 //логгер должен удовлетворять интервейс айЛоггер
@@ -12,22 +12,22 @@ export class LoggerService implements ILogger {
 	constructor() {
 		this.logger = new Logger({
 			displayInstanceName: false,
-			displayLoggerName: false,  //не нужен так как логгер один
+			displayLoggerName: false, //не нужен так как логгер один
 			displayFilePath: 'hidden',
-			displayFunctionName: false
+			displayFunctionName: false,
 		})
 	}
 
 	//писать static log был бы самый тупой способ, импортируем класс и потом вызываем методы
-	log(...args: unknown[]) {
+	log(...args: unknown[]): void {
 		this.logger.info(...args)
 	}
 
-	error(...args: unknown[]) {
+	error(...args: unknown[]): void {
 		this.logger.error(...args)
 	}
 
-	warn(...args: unknown[]) {
+	warn(...args: unknown[]): void {
 		this.logger.warn(...args)
 	}
 }

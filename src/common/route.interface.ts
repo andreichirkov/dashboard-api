@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express'
 
 export interface IControllerRoute {
 	path: string
@@ -10,3 +10,5 @@ export interface IControllerRoute {
 	//keyof получает ключи, TS уже тут проверяет существование методов таких в Router
 	method: keyof Pick<Router, 'get' | 'post' | 'delete' | 'patch' | 'put'>
 }
+
+export type ExpressReturnType = Response<any, Record<string, any>>
