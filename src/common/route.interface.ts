@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express'
+import { IMiddleware } from './middleware.interface'
 
 export interface IControllerRoute {
 	path: string
@@ -9,6 +10,7 @@ export interface IControllerRoute {
 	//Достаем все методы эти короче видимо так
 	//keyof получает ключи, TS уже тут проверяет существование методов таких в Router
 	method: keyof Pick<Router, 'get' | 'post' | 'delete' | 'patch' | 'put'>
+	middlewares?: IMiddleware[]
 }
 
 export type ExpressReturnType = Response<any, Record<string, any>>
