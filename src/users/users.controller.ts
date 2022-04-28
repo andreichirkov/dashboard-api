@@ -35,6 +35,12 @@ export class UserController extends BaseController implements IUserController {
 				func: this.login,
 				middlewares: [new ValidateMiddleware(UserLoginDto)],
 			},
+			{
+				path: '/info',
+				method: 'get',
+				func: this.info,
+				middlewares: [],
+			},
 		])
 	}
 
@@ -63,6 +69,10 @@ export class UserController extends BaseController implements IUserController {
 			return next(new HTTPError(422, 'Такой пользователь уже сущетвует'))
 		}
 		this.ok(res, { email: result.email, id: result.id })
+	}
+
+	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+		this.ok(res, { email: user})
 	}
 
 	//шифроваться будет email и принимать секрет из энва
